@@ -173,6 +173,42 @@ class DoublyLinkedList {
     this.length--
     return node
   }
+
+  // swaps the VALUES of first and last nodes (not the nodes themselves)
+  swapFirstLast() {
+    // If the list has less than two nodes, do nothing
+    if (this.length < 2) return
+    // Store the head value in a temporary variable
+    const value = this.head.value
+    // Set head value to the value of the tail node
+    this.head.value = this.tail.value
+    // Set tail value to the stored value of the head node
+    this.tail.value = value
+  }
+
+  // reverse all nodes in the list
+  reverse() {
+    // Initialize current pointer at head
+    let current = this.head
+    // Create a temp pointer for swapping
+    let temp = null
+
+    // Iterate through the list
+    while (current !== null) {
+      // Store the previous node in temp
+      temp = current.prev
+      // Swap previous and next pointers of current node
+      current.prev = current.next
+      current.next = temp
+      // Move current pointer to the previous node (remember current.prev is current.next so it moves to the next item in the list)
+      current = current.prev
+    }
+
+    // Swap head and tail pointers
+    temp = this.head
+    this.head = this.tail
+    this.tail = temp
+  }
 }
 
 function test() {
