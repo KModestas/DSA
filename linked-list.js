@@ -242,11 +242,11 @@ class LinkedList {
   // allows you to iterate over the list with a for of loop.
 
   /* 
-  - Symbol.iterator is a built-in symbol that represents the default iteration mechanism for an objects
+  - Symbol.iterator is a built-in symbol that represents the default iteration mechanism for objects
   
-  - we are basically telling the JS engine that it should call this method whenever it iterates through the linked list object with a for of loop
+  - we are basically telling the JS engine that it should call this method whenever it iterates through the linked list object with a for of loop. so JS is basically calling linkedList[Symbol.iterator](); on the object you are looping over
   
-  - the JS engine expects each iteration to return an object wth a .next() method which returns { done: Boolean }
+  - the JS engine expects your method to a .next() method which returns { done: Boolean }
   
   - for each iteration, JS engine will invoke .next() and stop when { done: false }
   
@@ -259,30 +259,49 @@ class LinkedList {
       node = node.next
     }
   }
+
+  // Check if the list is circular (infinite loop) - accidently always points to another node rather than eventually reaching a node that terminates the list with next: null
+  circular() {
+    let slow = this.head // will iterate by one node
+    let fast = this.head // will iterate by 2 nodes
+
+    while (fast.next && fast.next.next) {
+      slow = slow.next
+      fast = fast.next.next
+
+      // if slow catches up to fast, it means that fast is looping over list again (infinitely)
+      if (slow === fast) {
+        return true
+      }
+    }
+
+    // loop terminated because it encountered  next: null, this means there is no circular loop
+    return false
+  }
 }
 
 function test() {
-  let ll = new LinkedList(1)
-  ll.push(2)
-  ll.push(3)
-  ll.push(4)
+  let linkedList = new LinkedList(1)
+  linkedList.push(2)
+  linkedList.push(3)
+  linkedList.push(4)
 
-  // ll.forEach((node, i) => {
+  // linkedList.forEach((node, i) => {
   //   console.log('Node at index: ', i)
   //   console.log('value: ', node.value)
   // })
 
-  // for (node of ll) {
+  // for (node of linkedList) {
   //   console.log('node: ', node.value)
   // }
 
   // console.log('Linked List before reverse():')
-  // myLinkedList.printList()
+  // linkedList.printList()
 
-  // myLinkedList.reverse()
+  // linkedList.reverse()
 
   // console.log('\nLinked List after reverse():')
-  // myLinkedList.printList()
+  // linkedList.printList()
 }
 
 test()

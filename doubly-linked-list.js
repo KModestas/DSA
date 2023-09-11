@@ -15,10 +15,10 @@ class DoublyLinkedList {
   }
 
   printList() {
-    let temp = this.head
-    while (temp !== null) {
-      console.log(temp.value)
-      temp = temp.next
+    let node = this.head
+    while (node !== null) {
+      console.log(node.value)
+      node = node.next
     }
   }
 
@@ -64,17 +64,17 @@ class DoublyLinkedList {
 
   pop() {
     if (this.length === 0) return undefined
-    let temp = this.tail
+    let node = this.tail
     if (this.length === 1) {
       this.head = null
       this.tail = null
     } else {
       this.tail = this.tail.prev
       this.tail.next = null
-      temp.prev = null
+      node.prev = null
     }
     this.length--
-    return temp
+    return node
   }
 
   unshift(value) {
@@ -93,39 +93,39 @@ class DoublyLinkedList {
 
   shift() {
     if (this.length === 0) return undefined
-    let temp = this.head
+    let node = this.head
     if (this.length === 1) {
       this.head = null
       this.tail = null
     } else {
       this.head = this.head.next
       this.head.prev = null
-      temp.next = null
+      node.next = null
     }
     this.length--
-    return temp
+    return node
   }
 
   get(index) {
     if (index < 0 || index >= this.length) return undefined
-    let temp = this.head
+    let node = this.head
     if (index < this.length / 2) {
       for (let i = 0; i < index; i++) {
-        temp = temp.next
+        node = node.next
       }
     } else {
-      temp = this.tail
+      node = this.tail
       for (let i = this.length - 1; i > index; i--) {
-        temp = temp.prev
+        node = node.prev
       }
     }
-    return temp
+    return node
   }
 
   set(index, value) {
-    let temp = this.get(index)
-    if (temp) {
-      temp.value = value
+    let node = this.get(index)
+    if (node) {
+      node.value = value
       return true
     }
     return false
@@ -152,42 +152,42 @@ class DoublyLinkedList {
     if (index === this.length - 1) return this.pop()
     if (index < 0 || index >= this.length) return undefined
 
-    const temp = this.get(index)
+    const node = this.get(index)
 
-    temp.prev.next = temp.next
-    temp.next.prev = temp.prev
-    temp.next = null
-    temp.prev = null
+    node.prev.next = node.next
+    node.next.prev = node.prev
+    node.next = null
+    node.prev = null
 
     this.length--
-    return temp
+    return node
   }
 }
 
 function test() {
-  let myDLL = new DoublyLinkedList(1)
-  myDLL.push(2)
-  myDLL.push(3)
-  myDLL.push(4)
-  myDLL.push(5)
+  let doublyLinkedList = new DoublyLinkedList(1)
+  doublyLinkedList.push(2)
+  doublyLinkedList.push(3)
+  doublyLinkedList.push(4)
+  doublyLinkedList.push(5)
 
   console.log('DLL before remove():')
-  myDLL.printList()
+  doublyLinkedList.printList()
 
   console.log('\nRemoved node:')
-  console.log(myDLL.remove(2).value)
+  console.log(doublyLinkedList.remove(2).value)
   console.log('DLL after remove() in middle:')
-  myDLL.printList()
+  doublyLinkedList.printList()
 
   console.log('\nRemoved node:')
-  console.log(myDLL.remove(0).value)
+  console.log(doublyLinkedList.remove(0).value)
   console.log('DLL after remove() of first node:')
-  myDLL.printList()
+  doublyLinkedList.printList()
 
   console.log('\nRemoved node:')
-  console.log(myDLL.remove(2).value)
+  console.log(doublyLinkedList.remove(2).value)
   console.log('DLL after remove() of last node:')
-  myDLL.printList()
+  doublyLinkedList.printList()
 }
 
 test()
