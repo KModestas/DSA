@@ -278,6 +278,28 @@ class LinkedList {
     // loop terminated because it encountered  next: null, this means there is no circular loop
     return false
   }
+
+  // Find the Node that is `n` spaces from the end of the list
+  fromLast(n) {
+    let slow = this.head
+    let fast = this.head
+
+    // First advance the fast variable by `n` spaces so that fast is `n` spaces ahead of slow:
+    while (n > 0) {
+      fast = fast.next
+      n--
+    }
+
+    // Adavance both fast and slow one space at a time until fast reaches the end
+    // When fast does reach the end, we know that slow is `n` spaces from the end of the list
+    while (fast.next) {
+      slow = slow.next
+      fast = fast.next
+    }
+
+    // slow will be our desired node
+    return slow
+  }
 }
 
 function test() {
