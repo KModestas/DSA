@@ -206,7 +206,6 @@ class LinkedList {
     return node
   }
 
-  // REVERSE the entire list:
   reverse() {
     // store current node we are working with for each iteration:
     let node = this.head
@@ -228,21 +227,37 @@ class LinkedList {
       node = next // Move to the next node in the list so we can reverse its pointers
     }
   }
+
+  forEach(fn) {
+    let node = this.head
+    let i = 0
+
+    while (node) {
+      fn(node, i)
+      node = node.next
+      i++
+    }
+  }
 }
 
 function test() {
-  let myLinkedList = new LinkedList(1)
-  myLinkedList.push(2)
-  myLinkedList.push(3)
-  myLinkedList.push(4)
+  let ll = new LinkedList(1)
+  ll.push(2)
+  ll.push(3)
+  ll.push(4)
 
-  console.log('Linked List before reverse():')
-  myLinkedList.printList()
+  // ll.forEach((node, i) => {
+  //   console.log('Node at index: ', i)
+  //   console.log('value: ', node.value)
+  // })
 
-  myLinkedList.reverse()
+  // console.log('Linked List before reverse():')
+  // myLinkedList.printList()
 
-  console.log('\nLinked List after reverse():')
-  myLinkedList.printList()
+  // myLinkedList.reverse()
+
+  // console.log('\nLinked List after reverse():')
+  // myLinkedList.printList()
 }
 
 test()
