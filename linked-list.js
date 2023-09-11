@@ -16,10 +16,10 @@ class LinkedList {
   }
 
   printList() {
-    let temp = this.head
-    while (temp !== null) {
-      console.log(temp.value)
-      temp = temp.next
+    let node = this.head
+    while (node !== null) {
+      console.log(node.value)
+      node = node.next
     }
   }
 
@@ -72,18 +72,18 @@ class LinkedList {
   pop() {
     if (this.length === 0) return undefined
     // we will loop over the entire list and keep track of 2 variables:
-    let temp = this.head // this will become the last node (one we want to remove)
+    let node = this.head // this will become the last node (one we want to remove)
     let pre = this.head // this will become the 2nd to last node (one which will become the tail)
 
     // loop through to the end of the list
-    while (temp.next) {
-      pre = temp
-      temp = temp.next
+    while (node.next) {
+      pre = node
+      node = node.next
     }
 
     // set the tail to be the 2nd to last node (which is now the last node)
     this.tail = pre
-    // set pre to point to null - this means that nothing is pointing to temp (last node) and so it will eventually get garbage collected.
+    // set pre to point to null - this means that nothing is pointing to node (last node) and so it will eventually get garbage collected.
     this.tail.next = null
     this.length--
 
@@ -94,7 +94,7 @@ class LinkedList {
     }
 
     // finally return the node that was removed:
-    return temp
+    return node
   }
 
   // ADD Node to BEGINNING of List:
@@ -117,7 +117,7 @@ class LinkedList {
   shift() {
     if (this.length === 0) return undefined
     // store node to remove in a variable so we can return it at the end
-    let temp = this.head
+    let node = this.head
     // make the current head the 2nd node in the list:
     this.head = this.head.next
     this.length--
@@ -127,8 +127,8 @@ class LinkedList {
       // here we dont have to set this.head to be null since it will already be null after setting it to this.head.next
     }
     // before returning the removed node, set next to null so that it doesn't reference the next item (just because)
-    temp.next = null
-    return temp
+    node.next = null
+    return node
   }
 
   // GET Node at particular index:
@@ -136,24 +136,24 @@ class LinkedList {
     // incase an invalid index is passed in:
     if (index < 0 || index >= this.length) return undefined
 
-    let temp = this.head
+    let node = this.head
     // continue looping until you reach the second to last index:
     for (let i = 0; i < index; i++) {
       // the node before the one we need will point to the one we need:
-      temp = temp.next
+      node = node.next
     }
 
-    // temp will be the node we need:
-    return temp
+    // node will be the node we need:
+    return node
   }
 
   // UPDATE value of a Node:
   set(index, value) {
     // get the Node we want to update:
-    let temp = this.get(index)
-    if (temp) {
+    let node = this.get(index)
+    if (node) {
       // set the new value:
-      temp.value = value
+      node.value = value
       return true
     }
     // incase if we didn't find the Node:
@@ -172,11 +172,11 @@ class LinkedList {
     // create the new Node:
     const newNode = new Node(value)
     // get the node that is BEFORE the node that is at our index:
-    const temp = this.get(index - 1)
+    const node = this.get(index - 1)
     // point our new node to the node that is currently at the index we need:
-    newNode.next = temp.next
+    newNode.next = node.next
     // make the node before our target index point to our new node
-    temp.next = newNode
+    node.next = newNode
 
     this.length++
 
@@ -194,38 +194,38 @@ class LinkedList {
     // get node before the one we want to remove:
     const before = this.get(index - 1)
     // this is the node we want to remove:
-    const temp = before.next
+    const node = before.next
 
     // make the before Node **skip** over the node we want to remove by pointing to the node AFTER the one we want to remove:
-    before.next = temp.next
+    before.next = node.next
 
     this.length--
 
     // return the removed node:
-    temp.next = null
-    return temp
+    node.next = null
+    return node
   }
 
   // REVERSE the entire list:
   reverse() {
     // store current node we are working with for each iteration:
-    let temp = this.head
+    let node = this.head
     // swap head and tail:
     this.head = this.tail
-    this.tail = temp
+    this.tail = node
     // variables to keep track of next and previous nodes in iteration:
-    let next = temp.next
+    let next = node.next
     let prev = null
     // loop over the entire list:
     // NOTE: we are looping in the same original order of the list, we are just changing the next pointers for each node.
     for (let i = 0; i < this.length; i++) {
-      next = temp.next // Store the next node before changing the next pointer of temp (useful for the last line)
+      next = node.next // Store the next node before changing the next pointer of node (useful for the last line)
 
       // core logic:
-      temp.next = prev // reverse the pointer (see next line)
-      prev = temp // the prev node of each iteration will be the temp node of the last iteration
+      node.next = prev // reverse the pointer (see next line)
+      prev = node // the prev node of each iteration will be the node of the last iteration
 
-      temp = next // Move to the next node in the list so we can reverse its pointers
+      node = next // Move to the next node in the list so we can reverse its pointers
     }
   }
 }
