@@ -73,17 +73,17 @@ class LinkedList {
     if (this.length === 0) return undefined
     // we will loop over the entire list and keep track of 2 variables:
     let node = this.head // this will become the last node (one we want to remove)
-    let pre = this.head // this will become the 2nd to last node (one which will become the tail)
+    let prev = this.head // this will become the 2nd to last node (one which will become the tail)
 
     // loop through to the end of the list
     while (node.next) {
-      pre = node
+      prev = node
       node = node.next
     }
 
     // set the tail to be the 2nd to last node (which is now the last node)
-    this.tail = pre
-    // set pre to point to null - this means that nothing is pointing to node (last node) and so it will eventually get garbage collected.
+    this.tail = prev
+    // set prev to point to null - this means that nothing is pointing to node (last node) and so it will eventually get garbage collected.
     this.tail.next = null
     this.length--
 
@@ -172,11 +172,12 @@ class LinkedList {
     // create the new Node:
     const newNode = new Node(value)
     // get the node that is BEFORE the node that is at our index:
-    const node = this.get(index - 1)
+    const before = this.get(index - 1)
+    const after = before.next
     // point our new node to the node that is currently at the index we need:
-    newNode.next = node.next
+    newNode.next = after
     // make the node before our target index point to our new node
-    node.next = newNode
+    before.next = newNode
 
     this.length++
 

@@ -2,6 +2,7 @@ class Node {
   constructor(value) {
     this.value = value
     this.next = null
+    // each Node now has a pointer to the previous node:
     this.prev = null
   }
 }
@@ -64,16 +65,20 @@ class DoublyLinkedList {
 
   pop() {
     if (this.length === 0) return undefined
+    // store node we want to remove so we can return it later
     let node = this.tail
+    // if you remove the last node in the list:
     if (this.length === 1) {
       this.head = null
       this.tail = null
     } else {
+      // current tail becomes the previous node
       this.tail = this.tail.prev
       this.tail.next = null
       node.prev = null
     }
     this.length--
+    // return removed node:
     return node
   }
 
@@ -106,13 +111,16 @@ class DoublyLinkedList {
     return node
   }
 
+  // We can either traverse the list by starting at the head or tail. This makes it retrieving items more efficient than a singly linked list if the item is nearer the end of the list
   get(index) {
     if (index < 0 || index >= this.length) return undefined
     let node = this.head
+    // if index is in the first half of the list, start from head:
     if (index < this.length / 2) {
       for (let i = 0; i < index; i++) {
         node = node.next
       }
+      // otherwise start from tail
     } else {
       node = this.tail
       for (let i = this.length - 1; i > index; i--) {
@@ -154,8 +162,11 @@ class DoublyLinkedList {
 
     const node = this.get(index)
 
+    // set the next pointer of the previous node to skip over this node
     node.prev.next = node.next
+    // set the prev pointer of the next node to skip over this node
     node.next.prev = node.prev
+
     node.next = null
     node.prev = null
 
