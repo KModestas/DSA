@@ -238,6 +238,27 @@ class LinkedList {
       i++
     }
   }
+
+  // allows you to iterate over the list with a for of loop.
+
+  /* 
+  - Symbol.iterator is a built-in symbol that represents the default iteration mechanism for an objects
+  
+  - we are basically telling the JS engine that it should call this method whenever it iterates through the linked list object with a for of loop
+  
+  - the JS engine expects each iteration to return an object wth a .next() method which returns { done: Boolean }
+  
+  - for each iteration, JS engine will invoke .next() and stop when { done: false }
+  
+  - generators simplify the creator of iterators since they automatically return this .next() method for you.
+  */
+  *[Symbol.iterator]() {
+    let node = this.head
+    while (node) {
+      yield node
+      node = node.next
+    }
+  }
 }
 
 function test() {
@@ -250,6 +271,10 @@ function test() {
   //   console.log('Node at index: ', i)
   //   console.log('value: ', node.value)
   // })
+
+  // for (node of ll) {
+  //   console.log('node: ', node.value)
+  // }
 
   // console.log('Linked List before reverse():')
   // myLinkedList.printList()
