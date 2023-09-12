@@ -301,6 +301,21 @@ class LinkedList {
     // slow will be our desired node
     return slow
   }
+
+  // Find the middle Node in the list:
+  midpoint(list) {
+    let slow = this.head
+    let fast = this.head
+
+    // fast is moving twice as fast as slow (2 places rather than 1)
+    // by the time fast reaches the end, slow will be at the midpoint
+    while (fast.next && fast.next.next) {
+      slow = slow.next
+      fast = fast.next.next
+    }
+
+    return slow
+  }
 }
 
 function test() {
