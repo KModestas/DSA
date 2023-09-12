@@ -1,4 +1,4 @@
-const Stack = require('./stack_arr')
+const Stack = require('./stack-arr')
 
 // Using two stacks to implement the functionality of a queue (interview question)
 // The goal is to make sure items are added and removed in FIFO order
