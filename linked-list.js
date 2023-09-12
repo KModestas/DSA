@@ -324,22 +324,22 @@ function test() {
   linkedList.push(3)
   linkedList.push(4)
 
-  // linkedList.forEach((node, i) => {
-  //   console.log('Node at index: ', i)
-  //   console.log('value: ', node.value)
-  // })
+  linkedList.forEach((node, i) => {
+    console.log('Node at index: ', i)
+    console.log('value: ', node.value)
+  })
 
-  // for (node of linkedList) {
-  //   console.log('node: ', node.value)
-  // }
+  for (node of linkedList) {
+    console.log('node: ', node.value)
+  }
 
-  // console.log('Linked List before reverse():')
-  // linkedList.printList()
+  console.log('Linked List before reverse():')
+  linkedList.printList()
 
-  // linkedList.reverse()
+  linkedList.reverse()
 
-  // console.log('\nLinked List after reverse():')
-  // linkedList.printList()
+  console.log('\nLinked List after reverse():')
+  linkedList.printList()
 }
 
 test()
