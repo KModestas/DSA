@@ -25,6 +25,8 @@ class Tree {
 
   traverseBF() {
     const arr = [this.root]
+
+    // for each node in the array, push its children to the array
     while (arr.length) {
       const node = arr.shift()
 
@@ -36,9 +38,11 @@ class Tree {
 
   traverseDF() {
     const arr = [this.root]
+
     while (arr.length) {
       const node = arr.shift()
 
+      // only difference between BF is that children are added to the beginning of the array:
       arr.unshift(...node.children)
     }
 
@@ -58,23 +62,25 @@ class Tree {
 // |       |
 // 4       5
 // Answer: [1, 3, 2]
+
+// basically returns the length of each row in the tree (as an array of values)
 function levelWidth(root) {
-  const arr = [root, 's']
-  const counters = [0]
+  const arr = [root, 'stop'] // 'stop' symbolises the end of a row
+  const widths = [0]
 
   while (arr.length > 1) {
     const node = arr.shift()
 
-    if (node === 's') {
-      counters.push(0)
-      arr.push('s')
+    if (node === 'stop') {
+      widths.push(0)
+      arr.push('stop')
     } else {
       arr.push(...node.children)
-      counters[counters.length - 1]++
+      widths[widths.length - 1]++
     }
   }
 
-  return counters
+  return widths
 }
 
 module.exports = { Tree, Node }
