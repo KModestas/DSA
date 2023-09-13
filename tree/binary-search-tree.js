@@ -15,25 +15,38 @@ class BST {
   // https://github.com/KModestas/algos/blob/master/completed_exercises/bst/index.js
   insert(value) {
     const newNode = new Node(value)
+
+    // we are inserting the first item:
     if (this.root === null) {
       this.root = newNode
       return this
     }
-    let temp = this.root
+
+    let currentNode = this.root
+
     while (true) {
-      if (newNode.value === temp.value) return undefined
-      if (newNode.value < temp.value) {
-        if (temp.left === null) {
-          temp.left = newNode
+      // NOTE: In our case we do not allow duplicates but if you wanted to, you can simply add a count property to each node and increment it when duplicate values are inserted:
+      if (newNode.value === currentNode.value) return undefined
+
+      // if new node is less than current node:
+      if (newNode.value < currentNode.value) {
+        // insert new node as left child of current node if space is not already filled:
+        if (currentNode.left === null) {
+          currentNode.left = newNode
           return this
         }
-        temp = temp.left
-      } else {
-        if (temp.right === null) {
-          temp.right = newNode
+        // left child already exists, move down to existing left child and re-run this same logic:
+        currentNode = currentNode.left
+      }
+      // if new node is greater than current node:
+      else {
+        // insert new node as right child if it's not already filled.
+        if (currentNode.right === null) {
+          currentNode.right = newNode
           return this
         }
-        temp = temp.right
+        // right child already exists, move down to it and re-run loop:
+        currentNode = currentNode.right
       }
     }
   }
@@ -110,17 +123,17 @@ class BST {
 }
 
 function test() {
-  let myTree = new BST()
+  let tree = new BST()
 
-  myTree.insert(47)
-  myTree.insert(21)
-  myTree.insert(76)
-  myTree.insert(18)
-  myTree.insert(27)
-  myTree.insert(52)
-  myTree.insert(82)
+  tree.insert(47)
+  tree.insert(21)
+  tree.insert(76)
+  tree.insert(18)
+  tree.insert(27)
+  tree.insert(52)
+  tree.insert(82)
 
-  console.log(myTree.DFSInOrder())
+  console.log(tree.DFSInOrder())
 }
 
 test()

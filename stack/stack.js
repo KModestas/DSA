@@ -64,8 +64,8 @@ class Stack {
 }
 
 function test() {
-  let myStack = new Stack(2)
-  myStack.push(1)
+  let stack = new Stack(2)
+  stack.push(1)
 }
 
 test()
