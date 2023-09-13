@@ -49,6 +49,7 @@ class BST {
     }
   }
 
+  // recursive version of the insert() method
   insertRecursively(value, currentNode = this.root) {
     // If the tree is empty
     if (!this.root) {
@@ -114,52 +115,76 @@ class BST {
     return currentNode
   }
 
+  // Breadth First Search:
   BFS() {
     let currentNode = this.root
-    let results = []
-    let queue = []
+    let queue = [] // queue of nodes we come across (nodes are processed in the order they are added - FIFO)
+    let values = [] // values of each node
+    // NOTE: we could just have a single array of nodes but its more convientnet to console.log all see all values
+
     queue.push(currentNode)
 
+    // while there are nodes in the queue:
     while (queue.length) {
+      // extract value of current node and remove it from queue
       currentNode = queue.shift()
-      results.push(currentNode.value)
+      values.push(currentNode.value)
+
+      // add left and right nodes to queue to be processed next
       if (currentNode.left) queue.push(currentNode.left)
       if (currentNode.right) queue.push(currentNode.right)
     }
-    return results
+    return values
   }
 
+  // Depth First Search - Pre Order:
   DFSPreOrder() {
-    let results = []
+    let values = []
+
     function traverse(currentNode) {
-      results.push(currentNode.value)
+      // push the value of each node to the array as you visit it
+      values.push(currentNode.value)
+      // keep traversing() the left side of the tree until you reach the end:
       if (currentNode.left) traverse(currentNode.left)
+      // when the last left node is reached, the traverse function for that node will be popped off the callstack (since it has no left or right node and no more traverse funcs to invoke). This means that the next traverse func (for the previous node) will continue and will this condition for the right node:
       if (currentNode.right) traverse(currentNode.right)
+      // ..at this point the traverse function has finished and will be popped off the stack
     }
+
     traverse(this.root)
-    return results
+
+    return values
   }
 
+  // Depth First Search - Post Order:
   DFSPostOrder() {
-    let results = []
+    let values = []
+
     function traverse(currentNode) {
       if (currentNode.left) traverse(currentNode.left)
       if (currentNode.right) traverse(currentNode.right)
-      results.push(currentNode.value)
+      // only difference between Pre Order is that values are pushed after each left and right node is traversed:
+      values.push(currentNode.value)
     }
+
     traverse(this.root)
-    return results
+
+    return values
   }
 
+  // Depth First Search - In Order:
   DFSInOrder() {
-    let results = []
+    let values = []
+
     function traverse(currentNode) {
       if (currentNode.left) traverse(currentNode.left)
-      results.push(currentNode.value)
+      values.push(currentNode.value)
       if (currentNode.right) traverse(currentNode.right)
     }
+
     traverse(this.root)
-    return results
+
+    return values
   }
 }
 
