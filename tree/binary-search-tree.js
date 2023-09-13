@@ -11,8 +11,6 @@ class BST {
     this.root = null
   }
 
-  // TOO: add recursive version?
-  // https://github.com/KModestas/algos/blob/master/completed_exercises/bst/index.js
   insert(value) {
     const newNode = new Node(value)
 
@@ -51,22 +49,65 @@ class BST {
     }
   }
 
+  insertRecursively(value, currentNode = this.root) {
+    // If the tree is empty
+    if (!this.root) {
+      this.root = new Node(value)
+      return this
+    }
+
+    // If the given value is less than the value of the current node
+    if (value < currentNode.value) {
+      // If left node is empty, insert there
+      if (!currentNode.left) {
+        currentNode.left = new Node(value)
+        return this
+      }
+      // Else, recurse into the left subtree
+      this.insert(value, currentNode.left)
+    }
+    // If the given value is greater than the value of the current node
+    else if (value > currentNode.value) {
+      // If right node is empty, insert there
+      if (!currentNode.right) {
+        currentNode.right = new Node(value)
+        return this
+      }
+      // Else, recurse into the right subtree
+      this.insert(value, currentNode.right)
+    }
+
+    // If the given value is equal to the value of the current node, simply return (since we don't allow duplicates in this BST)
+    return this
+  }
+
+  // Check if a node with a certain value exists
   contains(value) {
     if (this.root === null) return false
-    let temp = this.root
-    while (temp) {
-      if (value < temp.value) {
-        temp = temp.left
-      } else if (value > temp.value) {
-        temp = temp.right
+
+    let currentNode = this.root
+
+    // continue until you reach a node that has no children:
+    while (currentNode) {
+      // if value is less than current nodes value:
+      if (value < currentNode.value) {
+        // move onto left node
+        currentNode = currentNode.left
+        // if value if greater
+      } else if (value > currentNode.value) {
+        // move on to right node:
+        currentNode = currentNode.right
       } else {
+        // node found:
         return true
       }
     }
     return false
   }
 
+  // Find the Node with the smallest value (within a subtree) starting from a given node. If you pass in the root node then it will find the smallest value in the entire tree.
   minValueNode(currentNode) {
+    // Basically Keep going left until you reach the bottom
     while (currentNode.left !== null) {
       currentNode = currentNode.left
     }
