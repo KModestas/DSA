@@ -1,6 +1,7 @@
 class HashTable {
   constructor(size = 7) {
     // initialise the table (array) with a fixed size:
+    // NOTE: more complex impementation would allow for a dynamic size (dynamic resizing)
     this.dataMap = new Array(size)
   }
 
