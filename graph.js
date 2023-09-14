@@ -59,9 +59,9 @@ class Graph {
     // loop over the array of the vertex we want to remove
     while (this.adjacencyList[vertex].length) {
       // remove the first vertex from the array
-      let temp = this.adjacencyList[vertex].pop()
+      let vertex2 = this.adjacencyList[vertex].pop()
       // remove the connection between both vertices
-      this.removeEdge(vertex, temp)
+      this.removeEdge(vertex, vertex2)
     }
     // when all vertices have been processed and removed from the array, delete the vertex:
     delete this.adjacencyList[vertex]
