@@ -2,7 +2,10 @@
 
 class Events {
   constructor() {
-    this.events = {}
+    this.events = {
+      // [eventName]: [cb, cb, cb]
+      // ...
+    }
   }
 
   // Register an event handler
@@ -14,7 +17,7 @@ class Events {
     }
   }
 
-  // Trigger  all callbacks associated with a given eventName
+  // Trigger all callbacks associated with a given eventName
   trigger(eventName) {
     if (this.events[eventName]) {
       for (let cb of this.events[eventName]) {
