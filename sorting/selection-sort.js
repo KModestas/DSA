@@ -1,23 +1,23 @@
 function selectionSort(array) {
   for (let i = 0; i < array.length - 1; i++) {
-    // initially set the current item that will be compared to all other items as the minimum value
-    let min = i
+    // initially set current item to be min value
+    let indexOfMin = i
 
     // for each item, loop over all other items (i + 1 skips the current item so it doesnt compare to itself)
     for (let j = i + 1; j < array.length; j++) {
       // if you find an item that is lower than the current item, set it to min
-      if (array[j] < array[min]) {
-        min = j
+      if (array[j] < array[indexOfMin]) {
+        indexOfMin = j
       }
     }
 
-    // if we did find an itemt that is smaller:
-    if (i !== min) {
+    // if we did find a smaller item:
+    if (i !== indexOfMin) {
       let item = array[i]
 
       // swap the position of the smaller value with the position of current item
-      array[i] = array[min]
-      array[min] = item
+      array[i] = array[indexOfMin]
+      array[indexOfMin] = item
     }
   }
   return array
