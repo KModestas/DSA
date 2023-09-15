@@ -1,11 +1,12 @@
 function swap(array, firstIndex, secondIndex) {
-  let temp = array[firstIndex]
+  let item = array[firstIndex]
   array[firstIndex] = array[secondIndex]
-  array[secondIndex] = temp
+  array[secondIndex] = item
 }
 
 function pivot(array, pivotIndex = 0, endIndex = array.length - 1) {
   let swapIndex = pivotIndex
+
   for (let i = pivotIndex + 1; i <= endIndex; i++) {
     if (array[i] < array[pivotIndex]) {
       swapIndex++
