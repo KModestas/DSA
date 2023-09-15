@@ -32,7 +32,7 @@ function merge(array1, array2) {
   return combined
 }
 
-// Recursive function to keep splitting the array into halves and mergeing each half
+// Recursive function to keep splitting the array into halves, sorting them and merging each half
 function mergeSort(array) {
   if (array.length === 1) return array
 
