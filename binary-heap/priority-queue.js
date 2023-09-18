@@ -5,6 +5,7 @@ class Node {
   }
 }
 
+// This priority Queue is implemented as a minheap (lower number = higher priority and therefore loweest number starts at the top)
 class PriorityQueue {
   constructor() {
     // Initialize an empty array to store the elements with their priorities
@@ -22,7 +23,7 @@ class PriorityQueue {
   }
 
   // Helper method to move an element up the heap to its correct position
-  // Essentially all elements are initially added to the bottom. Their value is then checked with each parent, if it satisied the "heap condition" e.g. the element is smaller than the parent (in max heap) then it stays there. Otherwise, it swaps positions with the parent, and keeps doing this until it is inserted in a valid place.
+  // Essentially all elements are initially added to the bottom. Their value is then checked with each parent, if it satisied the "heap condition" e.g. the element is bigger than the parent (in min heap) then it stays there. Otherwise, it swaps positions with the parent, and keeps doing this until it is inserted in a valid place.
   bubbleUp() {
     // Get the index of the newly added element
     let idx = this.values.length - 1
@@ -34,9 +35,9 @@ class PriorityQueue {
       let parentIdx = Math.floor((idx - 1) / 2)
       // Get the parent element
       let parent = this.values[parentIdx]
-      // If the element's priority is greater than or equal to its parent's priority, stop
+      // If the element's priority is greater than or equal to its parent's priority, stop (bigger numbers are at the bottom)
       if (element.priority >= parent.priority) break
-      // Swap the element and its parent
+      // Swap the element and its parent (smaller priority bubbles up to the top)
       this.values[parentIdx] = element
       this.values[idx] = parent
       // Update the index to the parent's index
@@ -45,14 +46,17 @@ class PriorityQueue {
   }
 
   // Method to remove and return the element with the highest priority (the root of the heap)
+  // also makes sure that the next element with highest priority is added to the top
   dequeue() {
-    // Get the element with the highest priority (the minimum)
+    // Get the element with the highest priority (the minimum) from the start of the array
     const min = this.values[0]
     // Get the element at the end of the array
     const end = this.values.pop()
-    // If there are still elements in the queue, move the end element to the root and perform 'sink down'
+    // if the heap has elements other than the root:
     if (this.values.length > 0) {
+      // override the first element with the last element (if we used shift to remove the element then the whole array would have to be re-indexed)
       this.values[0] = end
+      // sink the element down until it reaches a valid position (must be bigger than its parent)
       this.sinkDown()
     }
     // Return the element with the highest priority
@@ -74,7 +78,7 @@ class PriorityQueue {
       let rightChildIdx = 2 * idx + 2
       // Initialize variables to store the left and right children
       let leftChild, rightChild
-      // Variable to track the index to swap with (initially set to null)
+      // Variable to track the index to swap with
       let swap = null
 
       // Check if the left child is within the bounds of the array
