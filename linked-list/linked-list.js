@@ -49,7 +49,7 @@ class LinkedList {
     this.length = 0
   }
 
-  // ADD Node to END of List:
+  // ADD Node to END of List (O1):
   push(value) {
     const newNode = new Node(value)
     // edgecase to set this new node to be the head and tail incase the linkedList is empty because you removed all items.
@@ -61,6 +61,7 @@ class LinkedList {
       this.tail.next = newNode
       // ...remember at this point, this.tale points to a particular object in memory so adding .next will update that object.
       // Then make the new node the tail. Since we are re-assigning tail to the new node, we break the reference to the old node completely.
+      // a node only exists because it is referenced in a variable. tail / head exists because they are stored in theses varaibles but also because a node's "next" is pointing to them (2 places), all other nodes are only referenced in 1 place (next)
       this.tail = newNode
     }
     this.length++
@@ -68,7 +69,7 @@ class LinkedList {
     return this
   }
 
-  // REMOVE Node from END of List:
+  // REMOVE Node from END of List (On):
   pop() {
     if (this.length === 0) return undefined
     // we will loop over the entire list and keep track of 2 variables:
@@ -97,7 +98,7 @@ class LinkedList {
     return node
   }
 
-  // ADD Node to BEGINNING of List:
+  // ADD Node to BEGINNING of List (O1):
   unshift(value) {
     const newNode = new Node(value)
     // eddge case when adding to an empty list:
@@ -113,7 +114,7 @@ class LinkedList {
     return this
   }
 
-  // REMOVE Node from BEGINNING of List:
+  // REMOVE Node from BEGINNING of List (O1):
   shift() {
     if (this.length === 0) return undefined
     // store node to remove in a variable so we can return it at the end
@@ -126,7 +127,7 @@ class LinkedList {
       this.tail = null
       // here we dont have to set this.head to be null since it will already be null after setting it to this.head.next
     }
-    // before returning the removed node, set next to null so that it doesn't reference the next item (just because)
+    // before returning the removed node, set next to null so that it doesn't reference the next item since we only want to return that single item and not the entire chain (just because)
     node.next = null
     return node
   }
