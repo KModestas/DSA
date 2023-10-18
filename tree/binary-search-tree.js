@@ -120,7 +120,7 @@ class BST {
     let currentNode = this.root
     let queue = [] // queue of nodes we come across (nodes are processed in the order they are added - FIFO)
     let values = [] // values of each node
-    // NOTE: we could just have a single array of nodes but its more convientnet to console.log all see all values
+    // NOTE: we could just have a single array of nodes but its more convenient to console.log all see all values
 
     queue.push(currentNode)
 
@@ -146,7 +146,7 @@ class BST {
       values.push(currentNode.value)
       // keep traversing() the left side of the tree until you reach the end:
       if (currentNode.left) traverse(currentNode.left)
-      // when the last left node is reached, the traverse function for that node will be popped off the callstack (since it has no left or right node and no more traverse funcs to invoke). This means that the next traverse func (for the previous node) will continue and will this condition for the right node:
+      // when the last left node is reached, the traverse function for that node will be popped off the callstack (since it has no left or right node and no more traverse funcs to invoke). This means that the next traverse func (for the previous node) will continue and will hit this condition for the right node:
       if (currentNode.right) traverse(currentNode.right)
       // ..at this point the traverse function has finished and will be popped off the stack
     }
