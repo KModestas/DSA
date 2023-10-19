@@ -248,11 +248,11 @@ class LinkedList {
   
   - we are basically telling the JS engine that it should call this method whenever it iterates through the linked list object with a for of loop. so JS is basically calling linkedList[Symbol.iterator](); on the object you are looping over
   
-  - the JS engine expects your method to a .next() method which returns { done: Boolean }
+  - the JS engine expects your method to return a .next() method which returns { done: Boolean }
   
   - for each iteration, JS engine will invoke .next() and stop when { done: false }
   
-  - generators simplify the creator of iterators since they automatically return this .next() method for you.
+  - generators simplify the creation of iterators since they automatically return this .next() method for you.
   */
   *[Symbol.iterator]() {
     let node = this.head
